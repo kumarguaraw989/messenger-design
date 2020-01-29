@@ -11,24 +11,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.androgynousis.messenger.R
 
 class Splash : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        if (Build.VERSION.SDK_INT >= 21) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
-        changeStatusBarColor()
-        Handler().postDelayed({
-            startActivity(Intent(this@Splash, SetupPhoneNumber::class.java))
-            finish()
-        }, 5 * 1000.toLong())
-    }
 
-    private fun changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= 21) window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val window = window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = Color.TRANSPARENT
         }
+
+        Handler().postDelayed({ startActivity(Intent(this@Splash, PhoneNumberActivity::class.java)).also { finish() } }, 1000.toLong())
+
     }
+
 }

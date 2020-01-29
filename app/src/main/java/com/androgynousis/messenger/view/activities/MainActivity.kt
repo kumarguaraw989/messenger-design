@@ -17,34 +17,31 @@ import com.androgynousis.messenger.R
 import com.androgynousis.messenger.view.fragment.FragmentContacts
 import com.androgynousis.messenger.view.fragment.FragmentHome
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     var chats: TextView? = null
-    var navigationView: NavigationView? = null
-    var navigationViewBottom: NavigationView? = null
-    var drawer: DrawerLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupToolbar(R.id.toolbar, "Messages")
-        val ft: FragmentTransaction
         val fragmentHome = FragmentHome()
-        ft = supportFragmentManager.beginTransaction()
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         ft.add(R.id.frameLayout, fragmentHome).commit()
-        drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer!!.setDrawerListener(toggle)
+
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout!!.setDrawerListener(toggle)
         toggle.syncState()
-        navigationView = findViewById<View>(R.id.nav_view) as NavigationView
-        navigationView!!.setNavigationItemSelectedListener(this)
-        navigationViewBottom = findViewById<View>(R.id.nav_view_bottom) as NavigationView
-        navigationViewBottom!!.setNavigationItemSelectedListener(this)
-        chats = MenuItemCompat.getActionView(navigationView!!.menu.findItem(R.id.nav_chats)) as TextView
+
+        nav_view!!.setNavigationItemSelectedListener(this)
+        nav_view_bottom!!.setNavigationItemSelectedListener(this)
         initializeCountDrawer()
     }
 
     private fun initializeCountDrawer() {
+        chats = MenuItemCompat.getActionView(nav_view!!.menu.findItem(R.id.nav_chats)) as TextView
         chats!!.gravity = Gravity.CENTER
         chats!!.setTypeface(null, Typeface.BOLD)
         chats!!.setTextColor(resources.getColor(R.color.colorAccent))
@@ -66,28 +63,30 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            drawer!!.openDrawer(GravityCompat.START) // OPEN DRAWER
+            drawer_layout!!.openDrawer(GravityCompat.START)
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean { // Handle navigation view item clicks here.
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val ft: FragmentTransaction
-        val id = item.itemId
-        if (id == R.id.nav_contacts) {
-            val fragmentContacts = FragmentContacts()
-            ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.frameLayout, fragmentContacts).addToBackStack(null).commit()
-        } else if (id == R.id.nav_chats) {
-            val fragmentHome = FragmentHome()
-            ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.frameLayout, fragmentHome).commit()
-        } else if (id == R.id.nav_trash) {
-        } else if (id == R.id.nav_settings) {
-        } else if (id == R.id.nav_logout) {
+        when (item.itemId) {
+            R.id.nav_contacts -> {
+                val fragmentContacts = FragmentContacts()
+                ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.frameLayout, fragmentContacts).addToBackStack(null).commit()
+            }
+            R.id.nav_chats -> {
+                val fragmentHome = FragmentHome()
+                ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.frameLayout, fragmentHome).commit()
+            }
+            R.id.nav_trash -> {}
+            R.id.nav_settings -> {}
+            R.id.nav_logout -> {}
         }
-        drawer!!.closeDrawer(GravityCompat.START)
+        drawer_layout!!.closeDrawer(GravityCompat.START)
         return true
     }
 

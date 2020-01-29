@@ -2,16 +2,14 @@ package com.androgynousis.messenger.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import com.androgynousis.messenger.R
+import kotlinx.android.synthetic.main.activity_setup_phone_number.*
 
-class SetupPhoneNumber : BaseActivity() {
+class PhoneNumberActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup_phone_number)
         setupToolbar(R.id.toolbar, "Setting Messenger")
-        val button = findViewById<View>(R.id.bt_continue) as Button
-        button.setOnClickListener { startActivity(Intent(this@SetupPhoneNumber, MainActivity::class.java)) }
+        bt_continue.setOnClickListener { startActivity(Intent(this@PhoneNumberActivity, MainActivity::class.java)) }
     }
 }

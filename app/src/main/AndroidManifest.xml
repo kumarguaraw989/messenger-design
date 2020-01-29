@@ -3,11 +3,11 @@
     package="com.androgynousis.messenger">
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:allowBackup="false">
 
         <activity
             android:name="com.androgynousis.messenger.view.activities.Splash"
@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name="com.androgynousis.messenger.view.activities.SetupPhoneNumber"
+            android:name="com.androgynousis.messenger.view.activities.PhoneNumberActivity"
             android:theme="@style/AppTheme" />
 
         <activity
