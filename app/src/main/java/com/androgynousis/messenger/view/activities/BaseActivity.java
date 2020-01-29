@@ -1,9 +1,9 @@
 package com.androgynousis.messenger.view.activities;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
 import com.androgynousis.messenger.R;

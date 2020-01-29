@@ -1,6 +1,6 @@
 package com.androgynousis.messenger.view.holder;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,16 +19,14 @@ public class HolderYou extends RecyclerView.ViewHolder {
     public TextView getTime() {
         return time;
     }
-
     public void setTime(TextView time) {
         this.time = time;
     }
-
     public TextView getChatText() {
         return chatText;
     }
-
     public void setChatText(TextView chatText) {
         this.chatText = chatText;
     }
+
 }
